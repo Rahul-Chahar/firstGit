@@ -1,0 +1,19 @@
+*{
+    font-family: 'Courier New', Courier, monospace;
+}
+h1{
+    font-family: 'Courier New', Courier, monospace;
+    color: #1b74e4;
+}
+
+.btn{
+    background-color: aqua;
+    color: black;
+    cursor: pointer;
+    margin: 2px;
+}
+
+.sbtn{
+    background-color: black;
+    color: white;
+}

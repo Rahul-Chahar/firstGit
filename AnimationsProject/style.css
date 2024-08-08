@@ -1,0 +1,129 @@
+.btn{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+
+    transition: background-color 0.5s ease;
+
+}
+
+.btn-primary{
+    background-color: blue;
+    color: white;
+}
+
+.btn-primary:hover{
+    background-color: red;
+}
+
+.btn-secondary{
+    background-color: green;
+    color: black;
+}
+
+.btn-secondary:hover{
+    background-color: yellow;
+}
+
+/*========================*/
+
+.accordian-item {
+    margin-bottom: 10px;
+}
+
+.accordian-header {
+    background-color: #f0f0f0;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.accordian-content {
+    display: none;
+    transition: display 10s ease;
+}
+
+.accordian-header:hover + .accordian-content {
+    display: block;
+}
+
+
+/*---- Loader 1 ----*/
+.loader-1 {
+    border: 5px solid #3e9d64;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border-top: 5px solid #3498db;
+    border-bottom: 5px solid #3498db;
+    animation: spin1 1s linear infinite;
+}
+
+@keyframes spin1 {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/*---- Loader 2 ----*/
+.pulse-loader {
+    width: 20px;
+    height: 20px;
+    background-color: #3498db;
+    border-radius: 50%;
+    animation: pulse 1s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.2);
+        opacity: 0;
+    }
+}
+
+/*---- Bounce Loader ----*/
+
+.bounce-loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    gap: 5px;
+}
+
+.bounce-loader > div{
+    width : 15px;
+    height: 15px;
+    border-radius:50%;
+    background-color: #3498db;
+    animation: bounce 1s infinite ease-in-out;
+
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}

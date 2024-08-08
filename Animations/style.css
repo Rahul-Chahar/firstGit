@@ -1,0 +1,47 @@
+#rotate {
+    height: 100px;
+    width: 100px;
+
+    margin-left: 300px;
+
+    background-color: blue;
+/* 
+    transition-property: background-color;
+    transition-duration: 5s;
+    transition-delay: 2s;
+    transition-timing-function: ease-in;
+     */
+
+     /* transition: background-color 5s ease-in 2s;
+     transition: width 5s ease-out 0s; */
+
+     /* transition: width 5s ease-out 0s, background-color 5s ease-in 2s; */
+
+
+}
+
+#rotate:hover {
+    /* background-color: red;
+    width: 400px; */
+    animation-name : widthandcolor;
+    animation-delay: 2s;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes widthandcolor {
+    0% {
+        background-color: blue;
+        width: 100px;
+    }
+
+    50% {
+        background-color: red;
+        
+    }
+
+    100% {
+        background-color: green;
+        width: 400px;
+    }
+}

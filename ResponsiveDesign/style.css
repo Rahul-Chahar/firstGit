@@ -1,0 +1,39 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    width: 100%;
+}
+
+.navbar {
+    height: 75px;
+    
+}
+
+ul{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+    gap : 5px;
+    padding:3px 2px;
+    background-color: green;
+}
+
+li {
+    border: 1px solid aquamarine;
+    padding: 4px 5px;
+    border-radius: 5px;
+    background-color: lightgreen;
+}
+
+@media screen and (max-width: 600px) {
+    /* Apply the following styles if maximum width is 600px or width <= 600px*/
+    ul {
+        flex-direction: column;
+        justify-content: center;
+    }
+}

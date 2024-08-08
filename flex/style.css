@@ -1,0 +1,6 @@
+.flex-container{
+    display: flex;
+    border: 1px solid black;
+    background-color: olive;
+    justify-content: space-between;
+}

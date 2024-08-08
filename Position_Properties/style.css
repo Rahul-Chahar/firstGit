@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+p{
+    font-size: 2rem;
+}
+
+/* .sticky{
+    background-color: orangered;
+    color: white;
+    position: sticky;
+    top: 0px;
+} */
+
+.fixed{
+    background-color: orangered;
+    color: white;
+    position: fixed;
+}

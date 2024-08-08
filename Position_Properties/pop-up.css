@@ -1,0 +1,28 @@
+nav > ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: whitesmoke;
+    background-color: orangered;
+}
+
+ul > li {
+    cursor: pointer;
+}
+
+.relative {
+    position: relative;
+}
+
+.first-popup{
+    position: absolute;
+    background-color: orangered;
+    display: none;
+    width: 200px;
+    border: 1px solid lightgrey;
+}
+
+.relative:hover .first-popup {
+    display: inline-block;
+}

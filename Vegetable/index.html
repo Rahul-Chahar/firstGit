@@ -38,7 +38,7 @@
         .then((response) => {
           response.data.forEach((veg) => {
             displayVegOnScreen(veg);
-            if (veg.boughtQty > 0) totalItemCount += 1; // Count each bought item
+            if (veg.boughtQty > 0) totalItemCount++; // Count only if some quantity was bought
           });
           document.getElementById("totalItemCount").innerText = totalItemCount;
         })
@@ -90,8 +90,8 @@
     }
 
     function buyVegetable(vegId, name, price, totalQty, currentBoughtQty) {
-      const vegItem = document.querySelector(li[data-id='${vegId}']);
-      const qtyInput = vegItem.querySelector(#qy-${vegId});
+      const vegItem = document.querySelector(`li[data-id='${vegId}']`);
+      const qtyInput = vegItem.querySelector(`#qy-${vegId}`);
       const qtyToBuy = parseFloat(qtyInput.value);
 
       if (qtyToBuy > 0 && qtyToBuy <= (totalQty - currentBoughtQty)) {
@@ -99,8 +99,15 @@
         const remainingQty = totalQty - updatedBoughtQty;
 
         axios
-          .put(${apiUrl}/${vegId}, { name, price, quantity: totalQty, boughtQty: updatedBoughtQty })
+          .put(`${apiUrl}/${vegId}`, { name, price, quantity: totalQty, boughtQty: updatedBoughtQty })
           .then(() => {
+            // Update the total item count if it's the first time buying this vegetable
+            if (currentBoughtQty === 0) {
+              totalItemCount += 1;
+              document.getElementById("totalItemCount").innerText = totalItemCount;
+            }
+
+            // Update the UI to show the remaining quantity and updated bought quantity
             vegItem.innerHTML = `
               ${name} - RS: ${price} ${remainingQty}KG
               <input id="qy-${vegId}" type="number" placeholder="0" min="0" max="${remainingQty}" step="0.1" style="width: 60px;" />
@@ -117,9 +124,9 @@
 
     function deleteVegetable(vegId) {
       axios
-        .delete(${apiUrl}/${vegId})
+        .delete(`${apiUrl}/${vegId}`)
         .then(() => {
-          const vegItem = document.querySelector(li[data-id='${vegId}']);
+          const vegItem = document.querySelector(`li[data-id='${vegId}']`);
           if (vegItem) {
             const boughtQty = parseFloat(vegItem.querySelector("span").innerText.split(" ")[1]);
             if (boughtQty > 0) totalItemCount -= 1; // Decrease total item count

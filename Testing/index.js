@@ -1,27 +1,43 @@
-const mainHeading = document.getElementById('main-heading');
-mainHeading.textContent = 'Fruit World';
-mainHeading.style.color = 'orange';
+const getBtn = document.getElementById("get-btn");
+const postBtn = document.getElementById("post-btn");
+const putBtn = document.getElementById("put-btn");
+const deleteBtn = document.getElementById("delete-btn");
 
-const header = document.getElementById('header');
-header.style.backgroundColor = 'green';
-header.style.borderBottom = '2px solid orange';
+getBtn.addEventListener("click", getTodos);
+postBtn.addEventListener("click", postTodo);
+putBtn.addEventListener("click", putTodo);
+deleteBtn.addEventListener("click", deleteTodo);
 
-const basketHeading = document.getElementById('basket-heading');
-basketHeading.style.color = 'green';
-
-const thanks = document.getElementById('thanks');
-thanks.innerHTML = '<p> Please visit us again </p>';
-
-const fruit = document.getElementsByClassName('fruit');
-fruit[2].style.backgroundColor = 'yellow';
-
-for(let i = 0; i < fruit.length; i++){
-  fruit[i].style.fontWeight = 'bold';
+function getTodos() {
+  // Write your code here
+  axios.get("https://crudcrud.com/api/87cb55881db946b7876b052739469a55/todo")
+    .then((resolve) => console.log(resolve))
+    .catch((error) => console.log(error));
 }
 
-const listItems = document.getElementsByTagName('li');
-listItems[4].style.color = 'blue';
+function postTodo() {
+  // Write your code here
+  axios.post("https://crudcrud.com/api/87cb55881db946b7876b052739469a55/todo", {
+    title: "Learn JavaScript",
+    completed: false,
+  })
+    .then((resolve) => console.log(resolve))
+    .catch((error) => console.log(error));
+}
 
-for(let i = 0; i < listItems.length; i++){
-  listItems[i].style.fontStyle = 'italic';
+function putTodo() {
+  // Write your code here
+  axios.put("https://crudcrud.com/api/87cb55881db946b7876b052739469a55/todo/6733439d3af7c503e8d5d8e7", {
+    title: "Learn Axios",
+    completed: true,
+  })
+    .then((resolve) => console.log(resolve))
+    .catch((error) => console.log(error));
+}
+
+function deleteTodo() {
+  // Write your code here
+  axios.delete("https://crudcrud.com/api/87cb55881db946b7876b052739469a55/todo/6733439d3af7c503e8d5d8e7")
+    .then((resolve) => console.log(resolve))
+    .catch((error) => console.log(error));
 }

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo Application</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Todo Application</h1>
+        <form id="todoForm">
+            <div class="form-group">
+                <label for="expenseAmount">Choose Expenses Amount</label>
+                <input type="number" class="form-control" id="expenseAmount" placeholder="Write your Expenses Amount...">
+            </div>
+
+            <div class="form-group">
+                <label for="description">Choose Description</label>
+                <input type="text" class="form-control" id="description" placeholder="Write your Description...">
+            </div>
+
+            <div class="form-group">
+                <label for="category">Choose Category</label>
+                <select id="category" class="form-control">
+                    <option value="Food">Food</option>
+                    <option value="Transport">Transport</option>
+                    <option value="Entertainment">Entertainment</option>
+                    <option value="Health">Health</option>
+                    <option value="Education">Education</option>
+                    <option value="Others">Others</option>
+                </select>
+            </div>
+
+            <button type="button" id="addTodo" class="btn btn-primary btn-block">Add Todo</button>
+        </form>
+
+        <ul id="todoList" class="list-group mt-4"></ul>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

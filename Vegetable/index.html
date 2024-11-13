@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veg Shop</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <h1>VEG SHOP</h1>
+  <!-- Form to Add Vegetable -->
+  <label for="vegName">Name:</label>
+  <input type="text" id="vegName" placeholder="ex - Potato" />
+  <br>
+  <label for="price">Price:</label>
+  <input type="number" id="price" placeholder="0" />
+  <br>
+  <label for="quantity">Quantity:</label>
+  <input type="number" id="quantity" placeholder="0" />
+  <br>
+  <button onclick="addToShop()">ADD TO SHOP</button>
+
+  <!-- Vegetable List -->
+  <ul id="vegList"></ul>
+
+  <!-- Total Item Count Display -->
+  <h3>Total: <span id="totalItemCount">0</span></h3>
+
+  <script>
+    const apiUrl = "https://crudcrud.com/api/1be62e4678444271baeaac70eba00dc8/vegetables"; // Replace with your actual API key
+    let totalItemCount = 0;
+
+    document.addEventListener("DOMContentLoaded", loadVegetables);
+
+    function loadVegetables() {
+      axios
+        .get(apiUrl)
+        .then((response) => {
+          response.data.forEach((veg) => {
+            displayVegOnScreen(veg);
+            if (veg.boughtQty > 0) totalItemCount += 1; // Count each bought item
+          });
+          document.getElementById("totalItemCount").innerText = totalItemCount;
+        })
+        .catch((error) => console.log(error));
+    }
+
+    function addToShop() {
+      const vegDetails = {
+        name: document.getElementById("vegName").value,
+        price: parseFloat(document.getElementById("price").value),
+        quantity: parseFloat(document.getElementById("quantity").value),
+        boughtQty: 0,
+      };
+
+      axios
+        .post(apiUrl, vegDetails)
+        .then((response) => {
+          displayVegOnScreen(response.data);
+          clearInputFields();
+        })
+        .catch((error) => console.log(error));
+    }
+
+    function displayVegOnScreen(veg) {
+      const vegList = document.getElementById("vegList");
+      const remainingQty = veg.quantity - veg.boughtQty;
+
+      const vegItem = document.createElement("li");
+      vegItem.setAttribute("data-id", veg._id);
+      vegItem.style.display = "flex";
+      vegItem.style.gap = "10px";
+      vegItem.style.alignItems = "center";
+
+      vegItem.innerHTML = `
+        ${veg.name} - RS: ${veg.price} ${remainingQty}KG
+        <input id="qy-${veg._id}" type="number" placeholder="0" min="0" max="${remainingQty}" step="0.1" style="width: 60px;" />
+        <button onclick="buyVegetable('${veg._id}', '${veg.name}', ${veg.price}, ${veg.quantity}, ${veg.boughtQty})">Buy</button>
+        <button onclick="deleteVegetable('${veg._id}')">Delete</button>
+        <span>Bought: ${veg.boughtQty} KG</span>
+      `;
+
+      vegList.appendChild(vegItem);
+    }
+
+    function clearInputFields() {
+      document.getElementById("vegName").value = "";
+      document.getElementById("price").value = "";
+      document.getElementById("quantity").value = "";
+    }
+
+    function buyVegetable(vegId, name, price, totalQty, currentBoughtQty) {
+      const vegItem = document.querySelector(li[data-id='${vegId}']);
+      const qtyInput = vegItem.querySelector(#qy-${vegId});
+      const qtyToBuy = parseFloat(qtyInput.value);
+
+      if (qtyToBuy > 0 && qtyToBuy <= (totalQty - currentBoughtQty)) {
+        const updatedBoughtQty = currentBoughtQty + qtyToBuy;
+        const remainingQty = totalQty - updatedBoughtQty;
+
+        axios
+          .put(${apiUrl}/${vegId}, { name, price, quantity: totalQty, boughtQty: updatedBoughtQty })
+          .then(() => {
+            vegItem.innerHTML = `
+              ${name} - RS: ${price} ${remainingQty}KG
+              <input id="qy-${vegId}" type="number" placeholder="0" min="0" max="${remainingQty}" step="0.1" style="width: 60px;" />
+              <button onclick="buyVegetable('${vegId}', '${name}', ${price}, ${totalQty}, ${updatedBoughtQty})">Buy</button>
+              <button onclick="deleteVegetable('${vegId}')">Delete</button>
+              <span>Bought: ${updatedBoughtQty} KG</span>
+            `;
+          })
+          .catch((error) => console.log(error));
+      } else {
+        alert("Invalid quantity");
+      }
+    }
+
+    function deleteVegetable(vegId) {
+      axios
+        .delete(${apiUrl}/${vegId})
+        .then(() => {
+          const vegItem = document.querySelector(li[data-id='${vegId}']);
+          if (vegItem) {
+            const boughtQty = parseFloat(vegItem.querySelector("span").innerText.split(" ")[1]);
+            if (boughtQty > 0) totalItemCount -= 1; // Decrease total item count
+            vegItem.remove();
+            document.getElementById("totalItemCount").innerText = totalItemCount;
+          }
+        })
+        .catch((error) => console.log(error));
+    }
+  </script>
+</body>
+</html>
